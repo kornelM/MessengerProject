@@ -4,18 +4,22 @@ import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.InputStreamReader;
+import java.net.Socket;
 
 public class MyReader implements Runnable {
 
     private final BufferedReader bufferedReader;
+    Socket socket;
 
-    public MyReader(final InputStream inputStream) {
-        this.bufferedReader = new BufferedReader(new InputStreamReader(inputStream));
+    public MyReader(final Socket socket) throws IOException {
+        this.socket = socket;
+        this.bufferedReader = new BufferedReader(new InputStreamReader(socket.getInputStream()));
     }
 
     @Override
     public void run() {
-        while (true) {
+
+        while (socket.isConnected()) {
             try {
                 String line = bufferedReader.readLine();
                 System.out.println(line);

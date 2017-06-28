@@ -14,6 +14,7 @@ public class MessengerServer {
 
         Socket socket = serverSocket.accept();
 
+
         Connetions connections = new Connetions(socket);
         connections.start();
     }

@@ -10,11 +10,12 @@ public class Connetions {
     private MyReader myReader;
     private MyWriter myWriter;
 
+
     private Executor pool;
 
     public Connetions(Socket socket) throws IOException {
-        this.myReader = new MyReader(socket.getInputStream());
-        this.myWriter= new MyWriter(socket.getOutputStream());
+        this.myReader = new MyReader(socket);
+        this.myWriter= new MyWriter(socket);
         pool = Executors.newCachedThreadPool();
     }
 
