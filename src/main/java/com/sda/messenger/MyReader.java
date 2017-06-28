@@ -10,19 +10,25 @@ public class MyReader implements Runnable {
 
     private final BufferedReader bufferedReader;
     Socket socket;
+    Login login;
+
 
     public MyReader(final Socket socket) throws IOException {
         this.socket = socket;
         this.bufferedReader = new BufferedReader(new InputStreamReader(socket.getInputStream()));
+        this.login = new Login();
     }
 
     @Override
     public void run() {
+        String nickname = login.findUser(socket.getInetAddress().getHostAddress());
 
-        while (socket.isConnected()) {
+        String line = "";
+
+        while (socket.isConnected() && line != null) {
             try {
-                String line = bufferedReader.readLine();
-                System.out.println(line);
+                line = bufferedReader.readLine();
+                System.out.println(nickname + ": " + line);
             } catch (IOException e) {
                 System.err.println(e);
                 throw new RuntimeException(e);

@@ -14,20 +14,21 @@ public class MyWriter implements Runnable {
 
 
 
+
     public MyWriter(final Socket socket) throws IOException {
 
         this.socket = socket;
         this.printWriter = new PrintWriter(socket.getOutputStream(), true);
         this.scanner = new Scanner(System.in);
+
     }
 
     @Override
     public void run() {
-        printWriter.println("Write your nick: ");
-        String nickname = scanner.nextLine();
+
         while (socket.isConnected()) {
             String line = scanner.nextLine();
-            printWriter.println(nickname + ": " +line);
+            printWriter.println(line);
         }
     }
 }
