@@ -1,4 +1,4 @@
-package com.sda;
+package com.sda.server;
 
 import java.io.BufferedReader;
 import java.io.IOException;

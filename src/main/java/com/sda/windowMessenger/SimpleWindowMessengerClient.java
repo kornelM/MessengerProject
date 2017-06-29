@@ -48,8 +48,12 @@ public class SimpleWindowMessengerClient {
         configureCommunication();
 
         Thread receiverThread = new Thread(new MessagesReceiver());
+        receiverThread.start();
 
         frame.getContentPane().add(BorderLayout.CENTER, mainPanel);
+        frame.setSize(440,330);
+        frame.setVisible(true);
+
     }
 
 
@@ -84,11 +88,9 @@ public class SimpleWindowMessengerClient {
 
 
     public class MessagesReceiver implements Runnable{
-
         @Override
         public void run() {
             String message;
-
             try{
                 while((message = reader.readLine()) != null)
                     System.out.println("Read: " + message);
