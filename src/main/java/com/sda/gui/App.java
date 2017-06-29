@@ -22,15 +22,14 @@ public class App {
     private JTextField textField1;
     private JTextArea textArea1;
     private ReaderForTextArea readerForTextArea;
-    private  BufferedReader bufferedReader;
-
+    private BufferedReader bufferedReader;
 
     public App() throws IOException {
         button1.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent actionEvent) {
-                System.out.println("Everything is fine");
                 System.out.println(textField1.getText());
+                textArea1.append(textField1.getText() + "\n");
                 textField1.setText("");
             }
         });
@@ -39,14 +38,10 @@ public class App {
             @Override
             public void actionPerformed(ActionEvent e) {
                 textArea1.append(textField1.getText() + "\n");
-                System.out.println("Everything is fine");
                 System.out.println(textField1.getText());
                 textField1.setText("");
             }
         });
-
-        bufferedReader = new BufferedReader(new InputStreamReader(new Socket("localhost", 4444).getInputStream()));
-        textArea1.append(bufferedReader.readLine());
     }
 
     public class ReaderForTextArea implements Runnable {
